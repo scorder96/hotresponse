@@ -3,9 +3,10 @@ import pb from "../pocketbase";
 import NavbarIn from "./NavbarIn";
 import { Button } from "./ui/button";
 import { DialogPasswordChange } from "./DialogPasswordChange";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Account() {
+  var navigate = useNavigate();
   return (
     <>
       <NavbarIn />
@@ -43,7 +44,13 @@ export function Account() {
               Support
             </Button>
           </Link>
-          <Button variant={"destructive"} onClick={() => pb.authStore.clear()}>
+          <Button
+            variant={"destructive"}
+            onClick={() => {
+              pb.authStore.clear();
+              navigate("/");
+            }}
+          >
             Logout
           </Button>
         </div>
