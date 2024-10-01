@@ -45,6 +45,8 @@ function AllProjects() {
               </li>
             );
           })}
+          {Projects.length == 0 &&
+            "No projects as of now. Create a new project to get started."}
         </ul>
       </div>
     </>
