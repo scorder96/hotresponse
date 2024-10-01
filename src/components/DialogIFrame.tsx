@@ -17,6 +17,7 @@ import { FeedbackPreview } from "./FeedbackPreview";
 
 export function DialogIFrame() {
   const [Title, setTitle] = useState("How to improve our product?");
+  const [Color, setColor] = useState("#0f172a");
   const [ButtonPosition, setButtonPosition] = useState(2);
   const [Theme, setTheme] = useState(0);
   return (
@@ -29,7 +30,12 @@ export function DialogIFrame() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px]">
         <div className="grid grid-cols-2 gap-8">
-          <FeedbackPreview title={Title} buttonposition={ButtonPosition} theme={Theme} />
+          <FeedbackPreview
+            title={Title}
+            buttonposition={ButtonPosition}
+            theme={Theme}
+            color={Color}
+          />
           <div className="space-y-4">
             <DialogHeader>
               <DialogTitle>Component settings</DialogTitle>
@@ -85,6 +91,18 @@ export function DialogIFrame() {
               >
                 Dark
               </Button>
+            </div>
+            <div>
+              <Label htmlFor="color">Accent Color</Label>
+              <Input
+                type="color"
+                id="color"
+                className="w-1/4"
+                value={Color}
+                onChange={(e) => {
+                  setColor(e.target.value);
+                }}
+              />
             </div>
             <Button variant={"secondary"} className="w-full">
               <Crown className="me-2" />

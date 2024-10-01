@@ -4,11 +4,12 @@ import { useState } from "react";
 import { Input } from "./ui/input";
 
 interface Props {
-  title: String;
+  title: string;
   buttonposition: number;
   theme: number;
+  color: String;
 }
-export function FeedbackPreview({ buttonposition, title, theme }: Props) {
+export function FeedbackPreview({ buttonposition, title, theme, color }: Props) {
   var btnclass = "float-right";
   var txtclass = "text-left";
   var themeclass = "bg-white text-black";
@@ -36,7 +37,10 @@ export function FeedbackPreview({ buttonposition, title, theme }: Props) {
           />
         </div>
         <div className={"flex " + btnclass}>
-          <Button className="bg-slate-900 text-slate-50 hover:bg-slate-900/90">
+          <Button
+            className="text-slate-50 hover:bg-slate-900/90"
+            style={{ backgroundColor: "" + color }}
+          >
             Submit
           </Button>
         </div>
