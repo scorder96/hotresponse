@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -11,15 +12,53 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { GearIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
-import { Crown } from "lucide-react";
+import { useEffect, useState } from "react";
 import { FeedbackPreview } from "./FeedbackPreview";
+import pb from "@/pocketbase";
+import { useParams } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 
 export function DialogIFrame() {
+  useEffect(() => {
+    fetchComponent();
+  }, []);
   const [Title, setTitle] = useState("How to improve our product?");
   const [Color, setColor] = useState("#0f172a");
-  const [ButtonPosition, setButtonPosition] = useState(2);
-  const [Theme, setTheme] = useState(0);
+  const [ButtonPosition, setButtonPosition] = useState("right");
+  const [Theme, setTheme] = useState("light");
+  const [CompID, setCompID] = useState(String);
+  const params = useParams();
+
+  async function fetchComponent() {
+    const record = await pb
+      .collection("components")
+      .getFirstListItem("project='" + params.projectid + "'");
+    console.log(record);
+    setTitle(record.title);
+    setButtonPosition(record.position);
+    setTheme(record.theme);
+    setColor(record.color);
+    setCompID(record.id);
+  }
+  async function saveAndCopy() {
+    console.log(CompID);
+    const newData = {
+      title: Title,
+      position: ButtonPosition,
+      theme: Theme,
+      color: Color,
+    };
+    await pb.collection("components").update(CompID, newData);
+    const lol =
+      "<iframe src='http://localhost:5173/feedback/" +
+      params.projectid +
+      "' style='height:176px'></iframe>";
+    navigator.clipboard.writeText(params.projectid ? lol : "");
+    toast({
+      title: "Copied!",
+      description: "Copied the IFrame code to clipboard",
+    });
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -56,22 +95,22 @@ export function DialogIFrame() {
             <div className="grid grid-cols-3 gap-4">
               <Button
                 variant={"outline"}
-                className={ButtonPosition == 0 ? "border-2 border-orange-200" : ""}
-                onClick={() => setButtonPosition(0)}
+                className={ButtonPosition == "left" ? "border-2 border-orange-200" : ""}
+                onClick={() => setButtonPosition("left")}
               >
                 Left
               </Button>
               <Button
                 variant={"outline"}
-                className={ButtonPosition == 1 ? "border-2 border-orange-200" : ""}
-                onClick={() => setButtonPosition(1)}
+                className={ButtonPosition == "center" ? "border-2 border-orange-200" : ""}
+                onClick={() => setButtonPosition("center")}
               >
                 Center
               </Button>
               <Button
                 variant={"outline"}
-                className={ButtonPosition == 2 ? "border-2 border-orange-200" : ""}
-                onClick={() => setButtonPosition(2)}
+                className={ButtonPosition == "right" ? "border-2 border-orange-200" : ""}
+                onClick={() => setButtonPosition("right")}
               >
                 Right
               </Button>
@@ -79,15 +118,21 @@ export function DialogIFrame() {
             <div className="grid grid-cols-3 gap-4">
               <Button
                 variant={"outline"}
-                className={Theme == 0 ? "border-2 border-orange-200" : ""}
-                onClick={() => setTheme(0)}
+                className={Theme == "light" ? "border-2 border-orange-200" : ""}
+                onClick={() => {
+                  setTheme("light");
+                  setColor("#000000");
+                }}
               >
                 Light
               </Button>
               <Button
                 variant={"outline"}
-                className={Theme == 1 ? "border-2 border-orange-200" : ""}
-                onClick={() => setTheme(1)}
+                className={Theme == "dark" ? "border-2 border-orange-200" : ""}
+                onClick={() => {
+                  setTheme("dark");
+                  setColor("#ffffff");
+                }}
               >
                 Dark
               </Button>
@@ -104,12 +149,16 @@ export function DialogIFrame() {
                 }}
               />
             </div>
-            <Button variant={"secondary"} className="w-full">
+            {/* <Button variant={"secondary"} className="w-full">
               <Crown className="me-2" />
               More options
-            </Button>
+            </Button> */}
             <DialogFooter>
-              <Button className="mt-4">Save and copy</Button>
+              <DialogClose asChild>
+                <Button className="mt-4" onClick={saveAndCopy}>
+                  Save and copy
+                </Button>
+              </DialogClose>
             </DialogFooter>
           </div>
         </div>

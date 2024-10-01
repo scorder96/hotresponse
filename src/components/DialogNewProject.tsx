@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import pb from "@/pocketbase";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   projectsno: number;
@@ -21,12 +22,22 @@ interface Props {
 
 export function DialogNewProject({ projectsno }: Props) {
   const [ProjectName, setProjectName] = useState(String);
+  const navigate = useNavigate();
   async function createProject() {
     const data = {
       userid: pb.authStore.model?.id,
       name: ProjectName,
     };
-    await pb.collection("projects").create(data);
+    const newProject = await pb.collection("projects").create(data);
+    const defaultComponent = {
+      project: newProject.id,
+      title: "How to improve our product?",
+      position: "right",
+      theme: "light",
+      color: "#000000",
+    };
+    await pb.collection("components").create(defaultComponent);
+    navigate(newProject.id);
   }
   return (
     <Dialog>
