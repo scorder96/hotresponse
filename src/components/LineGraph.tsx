@@ -8,8 +8,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  scales,
-  Ticks,
 } from "chart.js";
 
 ChartJS.register(
@@ -30,13 +28,13 @@ var dates: Array<number> = [29, 30, 31, 1, 2, 3, 4];
 
 export function LineGraph({ timeline }: Props) {
   var dailytracker: Array<number> = [0, 0, 0, 0, 0, 0, 0];
-  const ttt = new Date();
-  var today = ttt.getDate();
+  const today = new Date();
+  var todaysDate = today.getDate();
   for (let i = 6; i >= 0; i--) {
-    dates[i] = today;
-    today--;
-    if (today <= 0) {
-      today = monthdays[ttt.getMonth() - 1];
+    dates[i] = todaysDate;
+    todaysDate--;
+    if (todaysDate <= 0) {
+      todaysDate = monthdays[today.getMonth() - 1];
     }
   }
 
@@ -47,6 +45,8 @@ export function LineGraph({ timeline }: Props) {
       }
     }
   }
+  console.log(dailytracker);
+
   const options = {
     plugins: {
       legend: {
