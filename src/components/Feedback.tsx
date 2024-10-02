@@ -1,13 +1,37 @@
 import { Mic } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import pb from "@/pocketbase";
 import { useParams } from "react-router-dom";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { Input } from "./ui/input";
 
 export function Feedback() {
+  useEffect(() => {
+    fetchComponent();
+  }, []);
   const [Feedback, setFeedback] = useState(String);
+  const [Title, setTitle] = useState("How to improve our product?");
+  const [Color, setColor] = useState("#0f172a");
+  const [ButtonPosition, setButtonPosition] = useState("right");
+  const [Theme, setTheme] = useState("light");
   const params = useParams();
+
+  var btnclass = "float-right";
+  var txtclass = "text-left";
+  ButtonPosition == "left" ? (btnclass = "justify-start") : null;
+  ButtonPosition == "center" ? (btnclass = "justify-center") : null;
+  ButtonPosition == "right" ? (btnclass = "justify-end") : null;
+  ButtonPosition == "center" ? (txtclass = "text-center") : null;
+  async function fetchComponent() {
+    const record = await pb
+      .collection("components")
+      .getFirstListItem("project='" + params.projectid + "'");
+    setTitle(record.title);
+    setButtonPosition(record.position);
+    setTheme(record.theme);
+    setColor(record.color);
+  }
 
   async function onFeedback() {
     const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GOOGLE_API_KEY);
@@ -39,28 +63,27 @@ export function Feedback() {
     localStorage.setItem("fback-topic", jsonversion.topic);
   }
   return (
-    // <div className="flex justify-center items-center h-screen">
-    <div>
-      <h1 className="text-2xl">How can we improve our product?</h1>
-      <div className="flex my-4">
-        <Button variant={"outline"}>
-          <Mic />
-        </Button>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="border border-gray-300 rounded w-full h-100 p-1 outline-none focus:border-gray-600"
-          onChange={(e) => setFeedback(e.target.value)}
-          value={Feedback}
-          placeholder="A feedback or suggestion"
-          required
-        />
+    <div className={Theme}>
+      <div className="dark:bg-black dark:text-white">
+        <h1 className={"text-2xl " + txtclass}>{Title}</h1>
+        <div className="flex my-4 justify-end">
+          <Button variant={"outline"}>
+            <Mic />
+          </Button>
+          <Input
+            className="focus-visible:ring-slate-900"
+            onChange={(e) => setFeedback(e.target.value)}
+            value={Feedback}
+            placeholder="A feedback or suggestion"
+            required
+          />
+        </div>
+        <div className={"flex " + btnclass}>
+          <Button style={{ backgroundColor: "" + Color }} onClick={onFeedback}>
+            Submit
+          </Button>
+        </div>
       </div>
-      <Button className="float-right" onClick={onFeedback}>
-        Submit
-      </Button>
     </div>
-    // </div>
   );
 }

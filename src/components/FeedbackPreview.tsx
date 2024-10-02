@@ -35,12 +35,7 @@ export function FeedbackPreview({ buttonposition, title, theme, color }: Props) 
           />
         </div>
         <div className={"flex " + btnclass}>
-          <Button
-            className="text-slate-50 hover:bg-slate-900/90"
-            style={{ backgroundColor: "" + color }}
-          >
-            Submit
-          </Button>
+          <Button style={{ backgroundColor: "" + color }}>Submit</Button>
         </div>
       </div>
     </div>

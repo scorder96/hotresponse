@@ -33,7 +33,6 @@ export function DialogIFrame() {
     const record = await pb
       .collection("components")
       .getFirstListItem("project='" + params.projectid + "'");
-    console.log(record);
     setTitle(record.title);
     setButtonPosition(record.position);
     setTheme(record.theme);
