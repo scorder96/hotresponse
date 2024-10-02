@@ -44,7 +44,7 @@ export function Pricing() {
               All features <CheckIcon className="size-6 text-yellow-400" />
             </li>
             <li className="flex items-center justify-between">
-              Remove slushfeed branding
+              Remove HotResponse branding
               <CheckIcon className="size-6 text-yellow-400" />
             </li>
           </ul>
@@ -68,7 +68,7 @@ export function Pricing() {
               All features <CheckIcon className="size-6 text-yellow-400" />
             </li>
             <li className="flex items-center justify-between">
-              Remove slushfeed branding
+              Remove HotResponse branding
               <CheckIcon className="size-6 text-yellow-400" />
             </li>
             <li className="flex items-center justify-between">
