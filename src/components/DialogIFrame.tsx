@@ -51,7 +51,7 @@ export function DialogIFrame() {
     const lol =
       "<iframe src='http://localhost:5173/feedback/" +
       params.projectid +
-      "' style='height:176px'></iframe>";
+      "' style='height:144px; width:100%; border:none'></iframe>";
     navigator.clipboard.writeText(params.projectid ? lol : "");
     toast({
       title: "Copied!",
