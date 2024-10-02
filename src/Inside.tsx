@@ -105,11 +105,7 @@ function Inside() {
       title: "Task completed!",
       description: "Deleted task from to-do list",
       action: (
-        <ToastAction
-          className="bg-orange-300 border-none hover:bg-orange-200"
-          altText="undo"
-          onClick={() => undoRemoveTask(justincaseundo, task)}
-        >
+        <ToastAction altText="undo" onClick={() => undoRemoveTask(justincaseundo, task)}>
           Undo
         </ToastAction>
       ),
