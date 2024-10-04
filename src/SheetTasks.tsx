@@ -7,7 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { TaskItem } from "./components/TaskItem";
-import { useState } from "react";
+
 interface Props {
   tasks: Array<string>;
   onRemoveTask: (index: number, task: string) => void;
