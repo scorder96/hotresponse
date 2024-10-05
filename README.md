@@ -4,7 +4,7 @@ A SaaS platform that enables serial entrepreneurs and indie hackers to collect a
 
 1. Customize and copy the IFrame code from HotResponse and paste it into your project.
 2. The feedback received is analyzed by AI
-3. AI generates relevant tasks that will leadif required.
+3. AI generates relevant actionable tasks that lead to significant improvements.
 
 ![alt text](image.png)
 
