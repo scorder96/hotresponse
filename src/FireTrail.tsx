@@ -1,4 +1,4 @@
-import MouseTrail from "@pjsalita/react-mouse-trail";
+import MouseTrail from "@scorder/react-mouse-trail";
 
 export function FireTrail() {
   const config = {
