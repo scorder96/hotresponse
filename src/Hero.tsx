@@ -23,7 +23,7 @@ function Hero() {
         to polish your SaaS to perfection.
       </h1>
       <h2 className="text-xl font-light mx-32">
-        Your MVP has one purpose. To collect feedback. Make sure you do it right.
+        Your MVP has one purpose. To collect feedback. Let us do it right.
       </h2>
       <Link to={"signup"}>
         <Button className="my-8 px-12">Get Started</Button>
