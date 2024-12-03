@@ -20,8 +20,8 @@ function Home() {
       </div>
       <Hero />
       <FireTrail />
-      <section className="flex justify-center pb-16">
-        <h2 className="text-2xl text-center py-16 leading-loose text-decoration-line">
+      <section className="flex justify-center py-16">
+        <h2 className="text-2xl text-center leading-loose text-decoration-line">
           I appreciate you visiting my site.
           <br />I wish I could know what you think and feel about this.
           <hr className="border-2 border-orange-200" />
@@ -32,6 +32,13 @@ function Home() {
           So I built <i className="text-orange-500 font-bold">HOTRESPONSE🔥</i>
         </h2>
       </section>
+      <div className="px-32 py-16">
+        <img
+          src="/screenshot.png"
+          alt="screenshot of the hotresponse dashboard"
+          className="shadow-lg"
+        />
+      </div>
       <Outcomes />
       <Pricing />
       <section className="py-16 flex flex-col items-center">
