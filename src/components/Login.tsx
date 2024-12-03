@@ -1,16 +1,22 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import pb from "../pocketbase";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { Label } from "./ui/label";
 
 function Login() {
+  useEffect(() => {
+    authenticate();
+  }, []);
   const [Email, setEmail] = useState(String);
   const [Password, setPassword] = useState(String);
   const [Error, setError] = useState(String);
   const [Loading, setLoading] = useState(false);
   var navigate = useNavigate();
-
+  async function authenticate() {
+    pb.authStore.isValid && navigate("/projects");
+  }
   async function logIn(event: FormEvent) {
     setError("");
     setLoading(true);
@@ -31,18 +37,18 @@ function Login() {
           Welcome back! Please sign in to continue
         </span>
         <form onSubmit={(e) => logIn(e)}>
-          <label htmlFor="email" className="font-medium text-sm">
-            Email
-          </label>
+          <Label htmlFor="email">Email</Label>
+          <Input
+            type="email"
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={Email}
+          />
 
-          <Input type="email" onChange={(e) => setEmail(e.target.value)} value={Email} />
-
-          <label htmlFor="password" className="font-medium text-sm">
-            Password
-          </label>
-
+          <Label htmlFor="password">Password</Label>
           <Input
             type="password"
+            id="password"
             onChange={(e) => setPassword(e.target.value)}
             value={Password}
           />
@@ -54,6 +60,7 @@ function Login() {
           )}
           <button
             className="bg-orange-500 hover:bg-orange-400 text-white p-2 rounded w-full mt-4"
+            disabled={Loading}
             formAction="submit"
           >
             {Loading ? "Loading" : "Continue"}

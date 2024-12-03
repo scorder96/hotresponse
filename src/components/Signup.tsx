@@ -1,11 +1,14 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import pb from "../pocketbase";
 import { Link, useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { Label } from "./ui/label";
 
 function Signup() {
-  const [Username, setUsername] = useState(String);
+  useEffect(() => {
+    authenticate();
+  }, []);
   const [Email, setEmail] = useState(String);
   const [Password, setPassword] = useState(String);
   const [PasswordConfirm, setPasswordConfirm] = useState(String);
@@ -13,29 +16,48 @@ function Signup() {
   const [Error, setError] = useState(String);
   const [Loading, setLoading] = useState(false);
   var navigate = useNavigate();
-  // example create data
-  const data = {
-    username: Username,
-    email: Email,
-    emailVisibility: true,
-    password: Password,
-    passwordConfirm: PasswordConfirm,
-  };
+  async function authenticate() {
+    pb.authStore.isValid && navigate("/projects");
+  }
   async function signUp(event: FormEvent) {
     setError("");
     setLoading(true);
+    const data = {
+      email: Email,
+      emailVisibility: true,
+      password: Password,
+      passwordConfirm: PasswordConfirm,
+    };
     event.preventDefault();
-    await pb
+    const recordcreate = await pb
       .collection("users")
       .create(data)
       .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
-    await pb.collection("users").authWithPassword(Email, Password);
-    await pb.collection("users").requestVerification(Email);
+    if (recordcreate) {
+      const record = await pb
+        .collection("users")
+        .authWithPassword(Email, Password)
+        .catch((err) => {
+          setError(err.message);
+          setLoading(false);
+        });
+      if (record) {
+        await pb
+          .collection("users")
+          .requestVerification(Email)
+          .then(() => {
+            navigate("/emailverify");
+          })
+          .catch((err) => {
+            setError(err.message);
+            setLoading(false);
+          });
+      }
+    }
     setLoading(false);
-    pb.authStore.isValid && navigate("/emailverify");
   }
 
   return (
@@ -46,25 +68,18 @@ function Signup() {
           Welcome! Please fill in the details to get started.
         </span>
         <form onSubmit={(e) => signUp(e)}>
-          <label htmlFor="username" className="font-medium text-sm">
-            Username
-          </label>
+          <Label htmlFor="email">Email</Label>
           <Input
-            type="text"
-            onChange={(e) => setUsername(e.target.value)}
-            value={Username}
+            type="email"
+            id="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={Email}
           />
 
-          <label htmlFor="email" className="font-medium text-sm">
-            Email
-          </label>
-          <Input type="email" onChange={(e) => setEmail(e.target.value)} value={Email} />
-
-          <label htmlFor="password" className="font-medium text-sm">
-            Password
-          </label>
+          <Label htmlFor="password">Password</Label>
           <Input
             type="password"
+            id="password"
             className="mb-2 focus:mb-0"
             onChange={(e) => setPassword(e.target.value)}
             value={Password}
@@ -76,12 +91,10 @@ function Signup() {
               Your password must contain 8 or more characters.
             </span>
           )}
-
-          <label htmlFor="passwordconfirm" className="font-medium text-sm">
-            Confirm Password
-          </label>
+          <Label htmlFor="passwordconfirm">Confirm Password</Label>
           <Input
             type="password"
+            id="passwordconfirm"
             onChange={(e) => setPasswordConfirm(e.target.value)}
             value={PasswordConfirm}
           />
@@ -93,6 +106,7 @@ function Signup() {
           )}
           <button
             className="bg-orange-500 hover:bg-orange-400 text-white p-2 rounded w-full mt-4"
+            disabled={Loading}
             formAction="submit"
           >
             {Loading ? "Loading" : "Continue"}
