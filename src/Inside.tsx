@@ -126,7 +126,7 @@ function Inside() {
             <span className="text-6xl font-bold">{Feedbacks.length}</span>
             <span className="font-light ms-4">feedbacks</span>
 
-            <div className="flex my-4">
+            <div className="flex mt-4">
               <div className="flex items-center">
                 <ArrowTopRightIcon />
                 <span className="font-semibold text-green-500 ms-2">{Possentiments}</span>
@@ -137,22 +137,23 @@ function Inside() {
               </div>
             </div>
           </div>
-          <Link to={"/projects"}>
-            <Button variant={"secondary"}>
-              <ArrowLeftIcon className="me-2" />
-              All Projects
-            </Button>
-          </Link>
-        </div>
-        <div className="flex justify-end">
-          <div className="space-x-4">
-            <DialogIFrame />
-            <Button variant={"outline"} onClick={onCopy}>
-              <CopyIcon className="me-2" />
-              IFrame
-            </Button>
+          <div className="flex flex-col items-end space-y-4">
+            <Link to={"/projects"}>
+              <Button variant={"secondary"}>
+                <ArrowLeftIcon className="me-2" />
+                Back
+              </Button>
+            </Link>
+            <div className="space-x-4">
+              <DialogIFrame />
+              <Button variant={"outline"} onClick={onCopy}>
+                <CopyIcon className="me-2" />
+                IFrame
+              </Button>
+            </div>
           </div>
         </div>
+
         <Cards
           tasks={Taskstodo}
           topics={Topics}
