@@ -61,7 +61,7 @@ export function DialogIFrame() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="default">
           <GearIcon className="me-2" />
           Component
         </Button>
