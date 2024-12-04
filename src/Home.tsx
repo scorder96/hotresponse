@@ -5,6 +5,7 @@ import { Pricing } from "./Pricing";
 import Outcomes from "./Outcomes";
 import { FireTrail } from "./FireTrail";
 import { Button } from "./components/ui/button";
+import Footer from "./Footer";
 
 function Home() {
   var navigate = useNavigate();
@@ -47,41 +48,7 @@ function Home() {
           <Button className="my-8 px-12">Get Started</Button>
         </Link>
       </section>
-      <footer className="border-t-2 border-orange-400 grid grid-cols-3">
-        <div className="p-8 text-xl">
-          <Link to={"/"}>
-            <span className="text-xl text-orange-500 font-bold">HotResponse🔥</span>
-          </Link>
-        </div>
-        <div className="p-8">
-          <h3 className="text-xl mb-4 font-bold">Account</h3>
-          <Link to={"signup"} className="hover:text-orange-500">
-            Sign Up
-          </Link>
-          <br />
-          <Link to={"login"} className="hover:text-orange-500">
-            Log In
-          </Link>
-          <br />
-          <Link to={"account"} className="hover:text-orange-500">
-            Account
-          </Link>
-        </div>
-        <div className="p-8">
-          <h3 className="text-xl mb-4 font-bold">Navigate</h3>
-          <Link to={"/"} className="hover:text-orange-500">
-            Home
-          </Link>
-          <br />
-          <Link to={"pricing"} className="hover:text-orange-500">
-            Pricing
-          </Link>
-          <br />
-          <Link to={"support"} className="hover:text-orange-500">
-            Support
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

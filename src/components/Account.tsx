@@ -4,6 +4,7 @@ import NavbarIn from "./NavbarIn";
 import { Button } from "./ui/button";
 import { DialogPasswordChange } from "./DialogPasswordChange";
 import { Link, useNavigate } from "react-router-dom";
+import Footer from "@/Footer";
 
 export function Account() {
   var navigate = useNavigate();
@@ -55,6 +56,7 @@ export function Account() {
           </Button>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
