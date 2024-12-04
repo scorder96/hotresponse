@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import NavbarIn from "./components/NavbarIn";
 import {
   ArrowBottomRightIcon,
+  ArrowLeftIcon,
   ArrowTopRightIcon,
   CopyIcon,
-  InfoCircledIcon,
 } from "@radix-ui/react-icons";
 import { Button } from "./components/ui/button";
 import { Cards } from "./components/Cards";
@@ -138,7 +138,10 @@ function Inside() {
             </div>
           </div>
           <Link to={"/projects"}>
-            <Button variant={"outline"}>All Projects</Button>
+            <Button variant={"secondary"}>
+              <ArrowLeftIcon className="me-2" />
+              All Projects
+            </Button>
           </Link>
         </div>
         <div className="flex justify-end">
