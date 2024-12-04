@@ -49,9 +49,9 @@ export function DialogIFrame() {
     };
     await pb.collection("components").update(CompID, newData);
     const lol =
-      "<iframe src='http://localhost:5173/feedback/" +
+      "<iframe src='https://hotresponse.xyz/feedback/" +
       params.projectid +
-      "' style='height:144px; width:100%; border:none'></iframe>";
+      "' style='height:176px' frameBorder='0'></iframe>";
     navigator.clipboard.writeText(params.projectid ? lol : "");
     toast({
       title: "Copied!",

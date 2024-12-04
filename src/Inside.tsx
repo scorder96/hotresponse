@@ -84,7 +84,7 @@ function Inside() {
   const lol =
     "<iframe src='https://hotresponse.xyz/feedback/" +
     params.projectid +
-    "' style='height:176px'></iframe>";
+    "' style='height:176px' frameBorder='0'></iframe>";
   function onCopy() {
     navigator.clipboard.writeText(params.projectid ? lol : "");
     toast({
