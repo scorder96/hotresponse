@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function NavbarIn() {
   return (
-    <nav className="w-full shadow px-4 flex items-center justify-between py-4">
+    <nav className="w-full shadow px-16 flex items-center justify-between py-4">
       <div>
         <Link to={"/"}>
           <span className="text-xl text-orange-500 font-bold">HotResponse🔥</span>
@@ -10,7 +10,7 @@ function NavbarIn() {
       </div>
       <div className="hidden md:flex md:items-center cursor-pointer">
         <Link to="/pricing">
-          <span className="hover:text-orange-500 px-4">Upgrade</span>
+          <span className="hover:text-orange-500 px-4">Pricing</span>
         </Link>
         <Link to={"/account"}>
           <span className="hover:text-orange-500 px-4">Account</span>

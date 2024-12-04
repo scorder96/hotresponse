@@ -6,7 +6,7 @@ interface Props {
 
 function Navbar({ onLogIn }: Props) {
   return (
-    <nav className="w-full shadow px-4 flex items-center justify-between py-4">
+    <nav className="w-full shadow px-8 flex items-center justify-between py-4">
       <div>
         <Link to={"/"}>
           <span className="text-xl text-orange-500 font-bold">HotResponse🔥</span>
