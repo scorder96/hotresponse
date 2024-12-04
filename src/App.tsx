@@ -10,7 +10,7 @@ import { Feedback } from "./components/Feedback";
 import AllProjects from "./components/AllProjects";
 import { Toaster } from "./components/ui/toaster";
 import Support from "./components/Support";
-import { Pricing } from "./Pricing";
+import PricingPage from "./PricingPage";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           <Route path="account" element={<Account />} />
           <Route path="feedback" element={<NotFound />} />
           <Route path="feedback/:projectid" element={<Feedback />} />
-          <Route path="pricing" element={<Pricing />} />
+          <Route path="pricing" element={<PricingPage />} />
           <Route path="support" element={<Support />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

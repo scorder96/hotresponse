@@ -1,4 +1,5 @@
 import { CheckIcon } from "@radix-ui/react-icons";
+import { Button } from "./components/ui/button";
 
 export function Pricing() {
   return (
@@ -25,7 +26,7 @@ export function Pricing() {
             </li>
           </ul>
         </div>
-        <div className="rounded shadow hover:shadow-lg p-4">
+        <div className="rounded shadow hover:shadow-lg p-4 border-2 border-yellow-400">
           <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-600 text-2xl md:text-2xl font-bold mb-4">
             Standard
           </h2>
@@ -47,7 +48,9 @@ export function Pricing() {
               Remove HotResponse branding
               <CheckIcon className="size-6 text-yellow-400" />
             </li>
+            <li className="flex items-center justify-between">&nbsp;</li>
           </ul>
+          <Button className="w-full mt-8">Proceed</Button>
         </div>
         <div className="rounded shadow hover:shadow-lg p-4">
           <h2 className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-600 text-2xl md:text-2xl font-bold mb-4">
@@ -75,6 +78,7 @@ export function Pricing() {
               Priority support <CheckIcon className="size-6 text-yellow-400" />
             </li>
           </ul>
+          <Button className="w-full mt-8">Proceed</Button>
         </div>
       </div>
     </section>
