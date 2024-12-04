@@ -55,10 +55,10 @@ function ActivityDetail({ feedbacks, sentiments, tasks, topics, createdat }: Pro
               Topic
             </th>
             <th scope="col" className="px-6 py-3">
-              Created
+              Time
             </th>
             <th scope="col" className="px-6 py-3">
-              On
+              Date
             </th>
           </tr>
         </thead>
