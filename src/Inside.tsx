@@ -141,24 +141,9 @@ function Inside() {
             <Button variant={"outline"}>All Projects</Button>
           </Link>
         </div>
-        <div className="flex justify-between">
-          <div className="space-x-4">
-            <Button variant={"outline"}>
-              <InfoCircledIcon className="me-2" />
-              Rewards
-            </Button>
-            <Button variant={"outline"}>
-              <InfoCircledIcon className="me-2" />
-              Positive Loop
-            </Button>
-            <Button variant={"outline"}>
-              <InfoCircledIcon className="me-2" />
-              Workflow
-            </Button>
-          </div>
+        <div className="flex justify-end">
           <div className="space-x-4">
             <DialogIFrame />
-
             <Button variant={"outline"} onClick={onCopy}>
               <CopyIcon className="me-2" />
               IFrame
