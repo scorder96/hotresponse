@@ -42,9 +42,10 @@ function Inside() {
   const [FeedbackIds, setFeedbackIds] = useState(Array<string>);
 
   async function fetchFeedbacks() {
-    const record = await pb
-      .collection("feedbacks")
-      .getList(0, 30, { sort: "created", filter: "project='" + params.projectid + "'" });
+    const record = await pb.collection("feedbacks").getList(0, 30, {
+      sort: "created",
+      filter: "project='" + params.projectid + "'",
+    });
     for (let i = 0; i < record.items.length; i++) {
       feedbackids = [record.items[i].id, ...feedbackids];
       feedbacks = [record.items[i].feedback, ...feedbacks];

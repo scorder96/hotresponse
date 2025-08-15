@@ -1,5 +1,5 @@
 import PocketBase from "pocketbase";
 
-const pb = new PocketBase("https://1c6um.pocketcloud.xyz");
+const pb = new PocketBase("https://hotresponse.pockethost.io/");
 
 export default pb;

@@ -25,7 +25,7 @@ export function DialogNewProject({ projectsno }: Props) {
   const navigate = useNavigate();
   async function createProject() {
     const data = {
-      userid: pb.authStore.model?.id,
+      user: pb.authStore.model?.id,
       name: ProjectName,
     };
     const newProject = await pb.collection("projects").create(data);
